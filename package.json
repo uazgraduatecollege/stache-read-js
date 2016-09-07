@@ -1,0 +1,30 @@
+{
+  "name": "stashr",
+  "version": "0.0.1",
+  "description": "Utililty to read items from Stache.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/uazgraduatecollege/stashr.git"
+  },
+  "keywords": [
+    "node",
+    "file safe",
+    "stache"
+  ],
+  "author": [
+    "Patrick Barabe <pbarabe@email.arizona.edu>",
+    "Alex Wynter <awochna@email.arizona.edu>"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "homepage": "https://bitbucket.org/uazgraduatecollege/stashr#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "mocha": "^3.0.2"
+  }
+}

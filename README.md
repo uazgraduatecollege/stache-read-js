@@ -60,6 +60,7 @@ will output
   purpose: 'Romanes eunt domus',
   secret: '{ "romansgaveus": "aqueducts, sanitation, roads, and education" }',
   memo: 'Always look on the bright side of life',
-  secrets: { romansgaveus: 'aqueducts, sanitation, roads, and education' } }
+  parsedSecrets:
+   { romansgaveus: 'aqueducts, sanitation, roads, and education' } }
 ```
 

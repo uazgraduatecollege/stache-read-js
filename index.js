@@ -5,7 +5,7 @@ var url = require('url');
 function StacheR (server, client) {
   this.server = {};
   this.server.protocol = server.protocol || 'https';
-  this.server.domain = server.domain || 'stache.arizona.edu',
+  this.server.domain = server.domain || null,
   this.server.port = server.port || '443',
   this.server.path = server.path || '/api/v1/item/read/';
 

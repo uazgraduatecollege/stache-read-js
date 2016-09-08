@@ -19,8 +19,8 @@ describe("StacheR client", () => {
   var goodResponse = {
     nickname: "arthur-king-of-britons",
     purpose: "To seek the Grail",
-    secret: "{ run: 'away', whatfloats: 'witches', camelot: 'a silly place' }",
-    memo: "Now we see the violence inherent in the system!"
+    secret: "{ swallows: 'can carry coconuts', whatfloats: 'witches', camelot: 'a silly place', enchanter: 'some call him... Tim?', princess: 'has huge tracks of land', lancelot: 'heroic in his own particular idiom', robin: 'bravely runs away' }",
+    memo: "Strange women lying in ponds distributing swords is no basis for a system of government."
   };
   var invalidIdResponse = '<html> <head> <title>403 error</title> </head> <body> <pre>Invalid item ID</pre> </body> </html>';
   var unauthorizedResponse = '<html> <head> <title>403 error</title> </head> <body> <pre>Invalid API key</pre> </body> </html>';

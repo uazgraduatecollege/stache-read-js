@@ -2,10 +2,26 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 
+/**
+ * Creates a new StacheR client object.
+ *
+ * @class StacheR
+ * @param {Object} server - Object containing the remote service attributes.
+ * @param {String} server.domain - The remote server's domain or IP. Required.
+ *   No default value.
+ * @param {String} server.protocol - 'https' (default) or 'http'.
+ * @param {String} server.port - The network port. Defaults to `443`.
+ * @param {String} server.path - The Stache API request path. Defaults to
+ *   `/api/v1/item/read/`.
+ * @param {Object} client - Object containing the client parameters.
+ * @param {String} client.method - The request method to use. Defaults to `GET`.
+ * @param {String} client.userAgent - A string to sent as the 'User-Agent'
+ *   header.
+ */
 function StacheR (server, client) {
   this.server = {};
   this.server.protocol = server.protocol || 'https';
-  this.server.domain = server.domain || 'stache.arizona.edu',
+  this.server.domain = server.domain || null,
   this.server.port = server.port || '443',
   this.server.path = server.path || '/api/v1/item/read/';
 
@@ -14,6 +30,13 @@ function StacheR (server, client) {
   this.client.userAgent = client.userAgent || "UA Graduate College StacheR(ead)";
 }
 
+/**
+ * Request an stash item from the remote server.
+ *
+ * @param {String} item - The Stached item's number.
+ * @param {String} key - The Stached item's key.
+ * @return {Object} A JSON object holding the item's data or an Error.
+ */
 StacheR.prototype.get = function get (item, key, cb) {
 
   // assemble the URL from this.server
@@ -74,5 +97,10 @@ StacheR.prototype.get = function get (item, key, cb) {
   });
 }
 
+/**
+ * StacheR module
+ *
+ * The {@link StacheR} class
+ */
 module.exports = StacheR;
 

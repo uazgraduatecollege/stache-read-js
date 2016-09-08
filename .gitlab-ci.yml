@@ -1,0 +1,29 @@
+stages:
+  - test
+
+node4_test:
+  stage: test
+  image: node:4
+  script:
+    - npm install
+    - npm test
+  tags:
+    - docker
+
+node5_tests:
+  stage: test
+  image: node:5
+  script:
+    - npm install
+    - npm test
+  tags:
+    - docker
+
+node6_tests:
+  stage: test
+  image: node:6
+  script:
+    - npm install
+    - npm test
+  tags:
+    - docker

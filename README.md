@@ -38,6 +38,7 @@ Node's `JSON.parse()` work together, it's recommended to enclose both the
 object keys and their values in double-quotes.
 
 Eg: Given a Stached item with the following values:
+
  * nickname: `Brian`
  * purpose: `Romanes eunt domus`,
  * secret: `{ "romansgaveus": "aqueducts, sanitation, roads, and education" }`,

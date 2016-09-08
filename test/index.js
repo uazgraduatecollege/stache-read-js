@@ -13,14 +13,18 @@ var itemNumber = 1234;
 var itemKey = 'a0297d708e';
 
 describe("StacheR client", () => {
-  var testserver;
 
-  // mockup Stache responses
-  var goodResponse = "{\"nickname\":\"pb-test-stache-api\",\"purpose\":\"\",\"secret\":\"{ 'mykey':'r&3yEFrcNY3ir', 'mysecret':'6mwUgAENPuqgeFWwOH1+cVAl7OEOnGVV', 'mysong':'Yo ho ho and a bottle of rum' }\",\"memo\":\"\"";
+  // mockup a Stache server w/typical responses
+  var testserver;
+  var goodResponse = {
+    nickname: "arthur-king-of-britons",
+    purpose: "To seek the Grail",
+    secret: "{ run: 'away', whatfloats: 'witches', camelot: 'a silly place' }",
+    memo: "Now we see the violence inherent in the system!"
+  };
   var invalidIdResponse = '<html> <head> <title>403 error</title> </head> <body> <pre>Invalid item ID</pre> </body> </html>';
   var unauthorizedResponse = '<html> <head> <title>403 error</title> </head> <body> <pre>Invalid API key</pre> </body> </html>';
   var errorResponse = '<html> <head> <title>500 error</title> </head> <body> <pre>Unable to access the stored item</pre> </body> </html>';
-
   before((done) => {
     testapp.get("/item", (req, res) => {
       res
@@ -58,55 +62,52 @@ describe("StacheR client", () => {
   });
 
   describe("Verify test server", () => {
-    it("does not error and has a response", () => {
+    it("does not error and has a response", (done) => {
       mystache.get(itemNumber, itemKey, (error, response) => {
         expect(error).to.be.null;
         expect(response).to.be.ok;
+        done();
       });
     });
   });
 
   describe("Request an item correctly", () => {
-    it("should return an object with known Stache properties", () => {
+    it("should return an object with known Stache properties", (done) => {
       mystache.get(itemNumber, itemKey, (error, response) => {
-console.log('ACK!! `body` and `response.statusCode` are undefined, so why does this test not fail?');
         expect(error).to.be.null;
-        expect(response.statusCode.to.equal(200));
-        expect(body.to.be.ok);
-        expect(body.to.have.property('nickname'));
-        expect(body.to.have.property('purpose'));
-        expect(body.to.have.property('secret'));
-        expect(body.to.have.property('memo'));
+        expect(response).to.be.ok;
+        expect(response).to.have.property('nickname');
+        expect(response).to.have.property('purpose');
+        expect(response).to.have.property('secret');
+        expect(response).to.have.property('memo');
+        done();
       })
     });
   });
 
   describe("Request an item without an item number", () => {
-    it("should gracefully handle an unauthorized error 403", () => {
+    it("should gracefully handle an unauthorized error 403", (done) => {
       mystache.get(null, itemKey, (error, response) => {
-        expect(error.to.have.property('msg'));
-        expect(error.to.have.property('statusCode'));
-        expect(error.statusCode.to.equal(403));
+        expect(error).to.be.an('error');
+        done();
       });
     });
   });
 
   describe("Request an item that does not match the key", () => {
-    it("should gracefully handle a server error 500", () => {
+    it("should gracefully handle a server error 500", (done) => {
       mystache.get(12345, itemKey, (error, response) => {
-        expect(error.to.have.property('msg'));
-        expect(error.to.have.property('statusCode'));
-        expect(error.statusCode.to.equal(500));
+        expect(error).to.be.an('error');
+        done();
       });
     });
   });
 
   describe("Request an item using a bad key", () => {
-    it("should gracefully handle an unauthorized error 403", () => {
+    it("should gracefully handle an unauthorized error 403", (done) => {
       mystache.get(itemNumber, 'abcdefg', (error, response) => {
-        expect(error.to.have.property('msg'));
-        expect(error.to.have.property('statusCode'));
-        expect(error.statusCode.to.equal(403));
+        expect(error).to.be.an('error');
+        done();
       });
     });
   });

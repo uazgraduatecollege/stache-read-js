@@ -59,9 +59,10 @@ StacheR.prototype.get = function get (item, key, cb) {
           }
           break;
 
-        // by default, return response code & the server's message
+        // by default, return an error using the
+        // response code & the server's message
         default:
-          return cb({ statusCode: statusCode, msg: body });
+          return cb(new Error(`statusCode: ${statusCode}, msg: ${body}`));
           break;
       }
 

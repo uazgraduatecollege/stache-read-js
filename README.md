@@ -38,10 +38,10 @@ Node's `JSON.parse()` work together, it's recommended to enclose both the
 object keys and their values in double-quotes.
 
 Eg: Given a Stached item with the following values:
-* nickname: `Brian`
-* purpose: `Romanes eunt domus`,
-* secret: `{ "romansgaveus": "aqueducts, sanitation, roads, and education" }`,
-* memo: `Always look on the bright side of life`
+ * nickname: `Brian`
+ * purpose: `Romanes eunt domus`,
+ * secret: `{ "romansgaveus": "aqueducts, sanitation, roads, and education" }`,
+ * memo: `Always look on the bright side of life`
 
 Where `secret` holds a string that can be parsed into JSON, it's best to
 enclose both keys and string values in quotes.
@@ -63,4 +63,3 @@ will output
   parsedSecrets:
    { romansgaveus: 'aqueducts, sanitation, roads, and education' } }
 ```
-

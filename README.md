@@ -4,6 +4,8 @@ A simple NodeJS lib to query items stored in Stache
 
 ## Usage
 
+### StacheR.read()
+
 ```javascript
 var StacheR = require('./index');
 var myStache = new StacheR({
@@ -16,36 +18,43 @@ var myStache = new StacheR({
 
 var item = 12345;
 var key = 'a028e12b0dc38e62f169bc11229794eb57c95c6567c634958f9498ff70d97d70';
-myStache.get(item, key, (error, response) => {
+myStache.read(item, key, (error, response) => {
   if (error) {
-    console.error({ error: error });
+    console.error("Error:\n" + error.message);
   }
-
   if (response) {
-    console.log("Success:");
-    console.log({ response: response });
+    console.log(response);
   }
+});
+```
 
+### StacheR.fetch()
+
+The `fetch()` method wraps StacheR.get() in a Promise:
+
+```javascript
+myStache.fetch(item, key)
+.then((response) => {
+  response.secrets = JSON.parse(response.secret);
+  console.log(response);
+})
+.catch((error) => {
+  console.error("Error:\n" + error.message);
 });
 ```
 
 ## Use of JSON within Stache(d) items
 
-While the response body served by a successful stache request will be JSON,
-it may also be useful to define one or more elements of the stached item as
-JSON values. In such cases, given the return format from Stache and the way
-Node's `JSON.parse()` work together, it's recommended to enclose both the
-object keys and their values in double-quotes.
+While the response body served by a successful stache request will be JSON, it may also be useful to define one or more elements of the stached item as JSON values. In such cases, given the return format from Stache and the way Node's `JSON.parse()` work together, it's recommended to enclose both the object keys and their values in double-quotes.
 
 Eg: Given a Stached item with the following values:
 
- * nickname: `Brian`
- * purpose: `Romanes eunt domus`,
- * secret: `{ "romansgaveus": "aqueducts, sanitation, roads, and education" }`,
- * memo: `Always look on the bright side of life`
+- nickname: `Brian`
+- purpose: `Romanes eunt domus`,
+- secret: `{ "romansgaveus": "aqueducts, sanitation, roads, and education" }`,
+- memo: `Always look on the bright side of life`
 
-Where `secret` holds a string that can be parsed into JSON, it's best to
-enclose both keys and string values in quotes.
+Where `secret` holds a string that can be parsed into JSON, it's best to enclose both keys and string values in quotes.
 
 Then, given a successful request
 
@@ -64,3 +73,7 @@ will output
   parsedSecrets:
    { romansgaveus: 'aqueducts, sanitation, roads, and education' } }
 ```
+
+## Status
+
+A work in-progress, somewhat `unstable`. Contributors welcome. Ni!

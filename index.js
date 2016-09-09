@@ -1,6 +1,9 @@
+'use strict';
+
 var http = require('http');
 var https = require('https');
 var url = require('url');
+// var Promise = require('promise');
 
 /**
  * Creates a new StacheR client object.
@@ -21,24 +24,24 @@ var url = require('url');
 function StacheR (server, client) {
   this.server = {};
   this.server.protocol = server.protocol || 'https';
-  this.server.domain = server.domain || null,
-  this.server.port = server.port || '443',
+  this.server.domain = server.domain || null;
+  this.server.port = server.port || '443';
   this.server.path = server.path || '/api/v1/item/read/';
 
   this.client = {};
   this.client.method = 'GET';
-  this.client.userAgent = client.userAgent || "UA Graduate College StacheR(ead)";
+  this.client.userAgent = client.userAgent ||
+    "UA Graduate College StacheR(ead)";
 }
 
 /**
- * Request an stash item from the remote server.
+ * Request a stash item from the remote server.
  *
  * @param {String} item - The Stached item's number.
  * @param {String} key - The Stached item's key.
- * @return {Object} A JSON object holding the item's data or an Error.
+ * @param {Function} cb - Callback function.
  */
-StacheR.prototype.get = function get (item, key, cb) {
-
+StacheR.prototype.read = function read (item, key, cb) {
   // assemble the URL from this.server
   var stacheUrl = `${this.server.protocol}:\/\/${this.server.domain}:` +
     `${this.server.port}${this.server.path}${item}`;
@@ -48,7 +51,7 @@ StacheR.prototype.get = function get (item, key, cb) {
   urlProperties.method = this.client.method;
   urlProperties.headers = {
     'User-Agent': this.client.userAgent,
-    'X-STACHE-READ-KEY': key
+    'X-STACHE-READ-KEY': key,
   };
 
   // in production, we'll always use https, but
@@ -71,12 +74,12 @@ StacheR.prototype.get = function get (item, key, cb) {
 
     res.on('end', () => {
       var statusCode = res.statusCode;
-      var statusMsg = res.statusMessage;
 
       switch (statusCode) {
         case 200:
           try {
             var parsed = JSON.parse(body);
+            cb(null, parsed);
           } catch (err) {
             return cb(err);
           }
@@ -85,17 +88,31 @@ StacheR.prototype.get = function get (item, key, cb) {
         // by default, return an error using the
         // response code & the server's message
         default:
-          return cb(new Error(`statusCode: ${statusCode}, msg: ${body}`));
-          break;
+          return cb(new Error(`statusCode: ${statusCode}\nmessage:\n${body}`));
       }
-
-      cb(null, parsed);
     });
-
   }).on('error', function (err) {
     cb(err);
   });
-}
+};
+
+/**
+ * Request an stash item from the remote server using the Promise class
+ *
+ * @param {String} item - The Stached item's number.
+ * @param {String} key - The Stached item's key.
+ * @return {Promise} - The promised Stache item.
+ */
+StacheR.prototype.fetch = function fetch (item, key) {
+  return new Promise((resolve, reject) => {
+    this.read(item, key, (error, response) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(response);
+    });
+  });
+};
 
 /**
  * StacheR module
@@ -103,4 +120,3 @@ StacheR.prototype.get = function get (item, key, cb) {
  * The {@link StacheR} class
  */
 module.exports = StacheR;
-

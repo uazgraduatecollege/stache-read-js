@@ -1,0 +1,19 @@
+extends: google
+env:
+  node: true
+  mocha: true
+rules:
+  space-before-function-paren:
+    - 2
+    - "always"
+  quotes: 0
+  comma-dangle:
+    - 2
+    - "always-multiline"
+  object-curly-spacing:
+    - 2
+    - "always"
+  radix: 0
+  arrow-parens:
+    - 2
+    - "always"

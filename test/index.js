@@ -1,3 +1,4 @@
+/* eslint-disable */
 var expect = require("chai").expect;
 var StacheR = require("../index");
 var testapp = require("express")();
@@ -63,7 +64,7 @@ describe("StacheR client", () => {
 
   describe("Verify test server", () => {
     it("does not error and has a response", (done) => {
-      mystache.get(itemNumber, itemKey, (error, response) => {
+      mystache.read(itemNumber, itemKey, (error, response) => {
         expect(error).to.be.null;
         expect(response).to.be.ok;
         done();
@@ -71,43 +72,87 @@ describe("StacheR client", () => {
     });
   });
 
-  describe("Request an item correctly", () => {
-    it("should return an object with known Stache properties", (done) => {
-      mystache.get(itemNumber, itemKey, (error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.be.ok;
-        expect(response).to.have.property('nickname');
-        expect(response).to.have.property('purpose');
-        expect(response).to.have.property('secret');
-        expect(response).to.have.property('memo');
-        done();
-      })
+  describe('StacheR#read', () => {
+    context("With valid inputs", () => {
+      it("should return an object with known Stache properties", (done) => {
+        mystache.read(itemNumber, itemKey, (error, response) => {
+          expect(error).to.be.null;
+          expect(response).to.be.ok;
+          expect(response).to.have.property('nickname');
+          expect(response).to.have.property('purpose');
+          expect(response).to.have.property('secret');
+          expect(response).to.have.property('memo');
+          done();
+        })
+      });
     });
-  });
 
-  describe("Request an item without an item number", () => {
-    it("should gracefully handle an unauthorized error 403", (done) => {
-      mystache.get(null, itemKey, (error, response) => {
-        expect(error).to.be.an('error');
-        done();
+    context("without an item number", () => {
+      it("should gracefully handle an unauthorized error 403", (done) => {
+        mystache.read(null, itemKey, (error, response) => {
+          expect(error).to.be.an('error');
+          done();
+        });
+      });
+    });
+
+    context("With a mismatched item & key", () => {
+      it("should gracefully handle a server error 500", (done) => {
+        mystache.read(12345, itemKey, (error, response) => {
+          expect(error).to.be.an('error');
+          done();
+        });
+      });
+    });
+
+    context("With a bad key", () => {
+      it("should gracefully handle an unauthorized error 403", (done) => {
+        mystache.read(itemNumber, 'abcdefg', (error, response) => {
+          expect(error).to.be.an('error');
+          done();
+        });
       });
     });
   });
 
-  describe("Request an item that does not match the key", () => {
-    it("should gracefully handle a server error 500", (done) => {
-      mystache.get(12345, itemKey, (error, response) => {
-        expect(error).to.be.an('error');
-        done();
+  describe('StacheR#fetch', () => {
+    it("should return a Promise", () => {
+      expect(mystache.fetch(itemNumber, itemKey)).to.be.an.instanceof(Promise);
+    });
+
+    context("With valid inputs", () => {
+      it("should return an object with known Stache properties", () => {
+        return mystache.fetch(itemNumber, itemKey).then((response) => {
+          expect(response).to.be.ok;
+          expect(response).to.have.property('nickname');
+          expect(response).to.have.property('purpose');
+          expect(response).to.have.property('secret');
+          expect(response).to.have.property('memo');
+        })
       });
     });
-  });
 
-  describe("Request an item using a bad key", () => {
-    it("should gracefully handle an unauthorized error 403", (done) => {
-      mystache.get(itemNumber, 'abcdefg', (error, response) => {
-        expect(error).to.be.an('error');
-        done();
+    context("without an item number", () => {
+      it("should gracefully handle an unauthorized error 403", () => {
+        return mystache.fetch(null, itemKey).catch((error) => {
+          expect(error).to.be.an('error');
+        });
+      });
+    });
+
+    context("With a mismatched item & key", () => {
+      it("should gracefully handle a server error 500", () => {
+        return mystache.fetch(12345, itemKey).catch((error) => {
+          expect(error).to.be.an('error');
+        });
+      });
+    });
+
+    context("With a bad key", () => {
+      it("should gracefully handle an unauthorized error 403", () => {
+        return mystache.fetch(itemNumber, 'abcdefg').catch((error) => {
+          expect(error).to.be.an('error');
+        });
       });
     });
   });

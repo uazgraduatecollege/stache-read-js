@@ -51,8 +51,8 @@ Eg: Given a Stached item with the following values:
 
 - nickname: `Brian`
 - purpose: `Romanes eunt domus`,
-- secret: `{ "romansgaveus": "aqueducts, sanitation, roads, and education" }`,
-- memo: `Always look on the bright side of life`
+- secret: `{ "romansgaveus": ["aqueducts", "sanitation", "roads", "education"] }`,
+- memo: `{ "advice": "Always look on the bright side of life" }`
 
 Where `secret` holds a string that can be parsed into JSON, it's best to enclose both keys and string values in quotes.
 
@@ -60,6 +60,7 @@ Then, given a successful request
 
 ```javascript
 response.parsedSecrets = JSON.parse(response.secret);
+response.parsedMemo = JSON.parse(response.memo);
 console.log(response);
 ```
 
@@ -68,12 +69,14 @@ will output
 ```javascript
 { nickname: 'Brian',
   purpose: 'Romanes eunt domus',
-  secret: '{ "romansgaveus": "aqueducts, sanitation, roads, and education" }',
-  memo: 'Always look on the bright side of life',
+  secret: '{ "romansgaveus": ["aqueducts", "sanitation", "roads", "education"] }',
+  memo: '{ "advice": "Always look on the bright side of life" }',
   parsedSecrets:
-   { romansgaveus: 'aqueducts, sanitation, roads, and education' } }
+   { romansgaveus: ['aqueducts', 'sanitation', 'roads', 'education'] },
+  parsedMemo:
+   { advice: 'Always look on the bright side of life' } }
 ```
 
 ## Status
 
-A work in-progress, somewhat `unstable`. Contributors welcome. Ni!
+A work in-progress, may be `unstable`. Contributors welcome if you bring us a shrubbery.

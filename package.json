@@ -4,6 +4,7 @@
   "description": "Utililty to read items from Stache.",
   "main": "index.js",
   "scripts": {
+    "pretest": "standard",
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
@@ -24,9 +25,10 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.4.0",
+    "eslint": "^3.18.0",
     "eslint-config-google": "^0.6.0",
     "express": "^4.14.0",
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "standard": "^9.0.2"
   }
 }

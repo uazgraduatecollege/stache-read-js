@@ -7,7 +7,6 @@ A simple NodeJS lib to query items stored in Stache
 ### StacheR.read()
 
 ```javascript
-var StacheR = require('./index');
 var myStache = new StacheR({
   domain: 'stache-server.my.edu',
   path: '/api/path/to/item/read/'

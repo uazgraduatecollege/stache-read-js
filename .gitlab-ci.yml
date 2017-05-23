@@ -11,16 +11,6 @@ node4_test:
     - docker
   allow_failure: true
 
-node5_tests:
-  stage: test
-  image: node:5
-  script:
-    - npm install
-    - npm test
-  tags:
-    - docker
-  allow_failure: true
-
 node6_tests:
   stage: test
   image: node:6

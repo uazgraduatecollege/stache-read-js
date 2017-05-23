@@ -26,6 +26,7 @@ describe('StacheR client', () => {
   var invalidIdResponse = '<html> <head> <title>403 error</title> </head> <body> <pre>Invalid item ID</pre> </body> </html>'
   var unauthorizedResponse = '<html> <head> <title>403 error</title> </head> <body> <pre>Invalid API key</pre> </body> </html>'
   var errorResponse = '<html> <head> <title>500 error</title> </head> <body> <pre>Unable to access the stored item</pre> </body> </html>'
+
   before((done) => {
     testapp.get('/item', (req, res) => {
       res
@@ -36,6 +37,18 @@ describe('StacheR client', () => {
     testapp.get('/item/:id', (req, res) => {
       var requestedItem = req.params.id
       var requestedKey = req.get('X-STACHE-READ-KEY')
+      if (requestedItem == 't123') {
+        // this if block corresponds to the timeout test
+        setTimeout( (res) => {
+          res
+          .status(500)
+          .send("Timeout timeout timeout")
+
+          testserver.close(() => {
+            done()
+          })
+        }, 30000)
+      }
       if (requestedItem == itemNumber && requestedKey != itemKey) {
         res
         .status(403)
@@ -113,6 +126,26 @@ describe('StacheR client', () => {
         })
       })
     })
+
+    /* TODO Figure out how a test like this should work
+    context('When the request times out', () => {
+      it('should gracefully handle a timeout error', (done) => {
+        var timeoutStache = new StacheR({
+          protocol: 'http',
+          domain: 'localhost',
+          port: 3000,
+          path: '/item/'
+        }, {
+          timeout: 1
+        })
+        timeoutStache.read('t123', 't123', (error, response) => {
+          // console.error({ err: error, res: response })
+          expect(error).to.be.an('error')
+          done()
+        })
+      })
+    })
+    */
   })
 
   describe('StacheR#fetch', () => {

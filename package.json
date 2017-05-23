@@ -1,6 +1,6 @@
 {
   "name": "stashr",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Utililty to read items from Stache.",
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,15 @@
     "file safe",
     "stache"
   ],
-  "author": [
-    "Patrick Barabe <pbarabe@email.arizona.edu>",
-    "Alex Wynter <awochna@email.arizona.edu>"
+  "contributors": [
+    {
+      "name": "Patrick Barabe",
+      "email": "pbarabe@email.arizona.edu"
+    },
+    {
+      "name": "Alex Wynter",
+      "email": "awochna@email.arizona.edu"
+    }
   ],
   "license": "SEE LICENSE IN LICENSE.md",
   "homepage": "https://bitbucket.org/uazgraduatecollege/stache-read#readme",

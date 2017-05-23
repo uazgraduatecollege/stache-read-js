@@ -30,6 +30,7 @@ function StacheR (server, client) {
 
   this.client = {}
   this.client.method = 'GET'
+  this.client.timeout = client.timeout || 30000
   this.client.userAgent = client.userAgent ||
     'UA Graduate College StacheR(ead)'
 }
@@ -49,6 +50,7 @@ StacheR.prototype.read = function read (item, key, cb) {
   // create a full URL properties object & add our headers
   var urlProperties = url.parse(stacheUrl)
   urlProperties.method = this.client.method
+  urlProperties.timeout = this.client.timeout
   urlProperties.headers = {
     'User-Agent': this.client.userAgent,
     'X-STACHE-READ-KEY': key

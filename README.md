@@ -42,7 +42,7 @@ myStache.fetch(item, key)
 });
 ```
 
-## Use of JSON within Stache(d) items
+## A Note on the Use of JSON within Stache(d) items
 
 While the response body served by a successful stache request will be JSON, it may also be useful to define one or more elements of the stached item as JSON values. In such cases, given the return format from Stache and the way Node's `JSON.parse()` work together, it's recommended to enclose both the object keys and their values in double-quotes.
 

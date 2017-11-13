@@ -5,7 +5,7 @@ A simple NodeJS lib to query items stored in Stache
 ## Requirements
 
 User of StacheRead assumes a working [NodeJS ](https://nodejs.org/) and [NPM](https://www.npmjs.com/) environment.
-StacheRead has been tested successfully with NodeJS versions 6.9+
+StacheRead has been tested successfully with NodeJS versions 6.9+ and 8.9+
 
 ## Installation
 

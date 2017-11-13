@@ -9,3 +9,12 @@ node6_tests:
     - npm test
   tags:
     - docker
+
+node8_tests:
+  stage: test
+  image: node:8
+  script:
+    - npm install
+    - npm test
+  tags:
+    - docker

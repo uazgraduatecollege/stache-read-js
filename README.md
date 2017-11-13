@@ -9,6 +9,7 @@ StacheRead has been tested successfully with NodeJS versions 6.9+
 
 ## Installation
 
+### Direct installation from Git
 1. Clone the git repository
 2. Install dependencies
 
@@ -16,6 +17,12 @@ StacheRead has been tested successfully with NodeJS versions 6.9+
 $ git clone <git-repo-url> <output-dir>
 $ cd <output-dir>
 $ npm install
+```
+
+### Installation as an NPM Dependency
+```sh
+$ cd <my_node_project>
+$ npm require --save git+ssh://git@bitbucket.org:uacatcode/stacheread-js.git
 ```
 
 ## Usage

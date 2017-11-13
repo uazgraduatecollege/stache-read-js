@@ -22,7 +22,7 @@ $ npm install
 ### Installation as an NPM Dependency
 ```sh
 $ cd <my_node_project>
-$ npm require --save git+ssh://git@bitbucket.org:uacatcode/stacheread-js.git
+$ npm install --save git+ssh://git@bitbucket.org:uacatcode/stacheread-js.git
 ```
 
 ## Usage

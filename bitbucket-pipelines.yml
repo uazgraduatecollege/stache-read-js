@@ -1,12 +1,6 @@
 pipelines:
   default:
     - step:
-        name: Node 6 test
-        image: node:6
-        script:
-          - npm install
-          - npm test
-    - step:
         name: Node 8 test
         image: node:8
         script:

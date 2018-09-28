@@ -1,15 +1,6 @@
 stages:
   - test
 
-node6_tests:
-  stage: test
-  image: node:6
-  script:
-    - npm install
-    - npm test
-  tags:
-    - docker
-
 node8_tests:
   stage: test
   image: node:8

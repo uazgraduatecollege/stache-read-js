@@ -1,7 +1,7 @@
 {
   "name": "stashr",
   "version": "0.1.0",
-  "description": "Utililty to read items from Stache.",
+  "description": "A read-only client for items available via the Stache API",
   "main": "index.js",
   "scripts": {
     "pretest": "standard",
@@ -9,25 +9,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/uazgraduatecollege/stache-read.git"
+    "url": "git+https://bitbucket.org/uazgraduatecollege/stacheread-js.git"
   },
   "keywords": [
     "node",
     "file safe",
     "stache"
   ],
-  "contributors": [
-    {
-      "name": "Patrick Barabe",
-      "email": "pbarabe@email.arizona.edu"
-    },
-    {
-      "name": "Alex Wynter",
-      "email": "awochna@email.arizona.edu"
-    }
+  "author": [
+    "Patrick Barabe <pbarabe@email.arizona.edu>"
   ],
   "license": "SEE LICENSE IN LICENSE.md",
-  "homepage": "https://bitbucket.org/uazgraduatecollege/stache-read#readme",
+  "homepage": "https://bitbucket.org/uazgraduatecollege/stacheread-js#readme",
+  "bugs": {
+    "url": "https://bitbucket.org/uazgraduatecollege/stacheread-js/issues"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=6.6 <8.*"
+  },
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.5.0",

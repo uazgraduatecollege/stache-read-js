@@ -2,6 +2,29 @@
 
 A simple NodeJS lib to query items stored in Stache
 
+## Requirements
+
+User of StacheRead assumes a working [NodeJS ](https://nodejs.org/) and [NPM](https://www.npmjs.com/) environment.
+StacheRead has been tested successfully with NodeJS versions 6.9+ and 8.9+
+
+## Installation
+
+### Direct installation from Git
+1. Clone the git repository
+2. Install dependencies
+
+```sh
+$ git clone <git-repo-url> <output-dir>
+$ cd <output-dir>
+$ npm install
+```
+
+### Installation as an NPM Dependency
+```sh
+$ cd <my_node_project>
+$ npm install --save git+https://bitbucket.org/uazgraduatecollege/stacheread-js.git
+```
+
 ## Usage
 
 ### StacheR.read()

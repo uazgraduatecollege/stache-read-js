@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/uacatcode/stacheread-js.git"
+    "url": "git+https://bitbucket.org/uazgraduatecollege/stacheread-js.git"
   },
   "keywords": [
     "node",
@@ -20,9 +20,9 @@
     "Patrick Barabe <pbarabe@email.arizona.edu>"
   ],
   "license": "SEE LICENSE IN LICENSE.md",
-  "homepage": "https://bitbucket.org/uacatcode/stacheread-js#readme",
+  "homepage": "https://bitbucket.org/uazgraduatecollege/stacheread-js#readme",
   "bugs": {
-    "url": "https://bitbucket.org/uacatcode/stacheread-js/issues"
+    "url": "https://bitbucket.org/uazgraduatecollege/stacheread-js/issues"
   },
   "private": true,
   "engines": {

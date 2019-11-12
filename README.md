@@ -36,18 +36,18 @@ var myStache = new StacheR({
 },
 {
   userAgent: 'My StacheReader'
-});
+})
 
-var item = 12345;
-var key = 'a028e12b0dc38e62f169bc11229794eb57c95c6567c634958f9498ff70d97d70';
+var item = process.env.myItem //12345
+var key = process.env.itemKey //'a028e12b0dc38e62f169bc11229794eb57c95c6567c634958f9498ff70d97d70'
 myStache.read(item, key, (error, response) => {
   if (error) {
-    console.error("Error:\n" + error.message);
+    console.error("Error:\n" + error.message)
   }
   if (response) {
-    console.log(response);
+    console.log(response)
   }
-});
+})
 ```
 
 ### StacheR.fetch()
@@ -57,12 +57,12 @@ The `fetch()` method wraps StacheR.get() in a Promise:
 ```javascript
 myStache.fetch(item, key)
 .then((response) => {
-  response.secrets = JSON.parse(response.secret);
-  console.log(response);
+  response.secrets = JSON.parse(response.secret)
+  console.log(response)
 })
 .catch((error) => {
-  console.error("Error:\n" + error.message);
-});
+  console.error("Error:\n" + error.message)
+})
 ```
 
 ## A Note on the Use of JSON within Stache(d) items
@@ -81,9 +81,9 @@ Where `secret` holds a string that can be parsed into JSON, it's best to enclose
 Then, given a successful request
 
 ```javascript
-response.parsedSecrets = JSON.parse(response.secret);
-response.parsedMemo = JSON.parse(response.memo);
-console.log(response);
+response.parsedSecrets = JSON.parse(response.secret)
+response.parsedMemo = JSON.parse(response.memo)
+console.log(response)
 ```
 
 will output

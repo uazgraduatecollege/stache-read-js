@@ -1,6 +1,6 @@
 {
   "name": "stashr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A read-only client for items available via the Stache API",
   "main": "index.js",
   "scripts": {

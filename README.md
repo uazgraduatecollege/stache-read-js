@@ -9,16 +9,6 @@ StacheRead has been tested successfully with NodeJS versions 6.9+ and 8.9+
 
 ## Installation
 
-### Direct installation from Git
-1. Clone the git repository
-2. Install dependencies
-
-```sh
-$ git clone <git-repo-url> <output-dir>
-$ cd <output-dir>
-$ npm install
-```
-
 ### Installation as an NPM Dependency
 ```sh
 $ cd <my_node_project>
@@ -27,19 +17,26 @@ $ npm install --save git+https://bitbucket.org/uazgraduatecollege/stacheread-js.
 
 ## Usage
 
-### StacheR.read()
+### Initialization
 
 ```javascript
-var myStache = new StacheR({
+const StacheR = require('stashr')
+
+let myStache = new StacheR({
   domain: 'stache-server.my.edu',
   path: '/api/path/to/item/read/'
 },
 {
   userAgent: 'My StacheReader'
 })
+```
 
-var item = process.env.myItem //12345
-var key = process.env.itemKey //'a028e12b0dc38e62f169bc11229794eb57c95c6567c634958f9498ff70d97d70'
+### StacheR.read()
+
+```javascript
+let item = process.env.myItem //12345
+let key = process.env.itemKey //'a028e12b0dc38e62f169bc11229794eb57c95c6567c634958f9498ff70d97d70'
+
 myStache.read(item, key, (error, response) => {
   if (error) {
     console.error("Error:\n" + error.message)
@@ -55,6 +52,9 @@ myStache.read(item, key, (error, response) => {
 The `fetch()` method wraps StacheR.get() in a Promise:
 
 ```javascript
+let item = process.env.myItem //12345
+let key = process.env.itemKey //'a028e12b0dc38e62f169bc11229794eb57c95c6567c634958f9498ff70d97d70'
+
 myStache.fetch(item, key)
 .then((response) => {
   response.secrets = JSON.parse(response.secret)
